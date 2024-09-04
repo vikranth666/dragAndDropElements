@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style media="screen">
+  @import url("https://fonts.googleapis.com/css2?family=Recursive:wght@500&display=swap");
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: "Recursive", sans-serif;
+}
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+flex-direction: column;
+background-color: #333;
+}
+
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 45vw;
+height: 40vh;
+max-width: 700px;
+margin: 0 auto;
+flex-wrap: wrap;
+}
+
+.box {
+width: 15vw;
+height: 15vh;
+cursor: move;
+position: relative;
+}
+
+img{
+  width: 100%;
+}
+  </style>
+</head>
+<body>
+
+ 
+      <div class="container">
+        <div class="box one" id="box1" draggable="true">
+          <img src="https://www.stepstherapy.com.au/wp-content/uploads/2018/10/Yazmin-profile-picture-square.jpg" alt="">
+        </div>
+        <div class="box two" id="box2" draggable="true">
+        <img src="https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg" alt="">
+        </div>
+        <div class="box three" id="box3" draggable="true">
+          <img src="http://gokubi.com/wp-content/uploads/2013/10/Steve-Andersen-Headshot-square1.jpeg" alt="">
+          </div>
+        <div class="box four" id="box4" draggable="true">
+          <img src="https://elireview.com/wp-content/uploads/2016/12/reed-profile-square.jpg" alt="">
+        </div>
+        <div class="box five" id="box5" draggable="true">
+          <img src="https://twelveminuteconvos.com/wp-content/uploads/2020/04/Kim-2.jpeg" alt="">
+        </div>
+        <div class="box six" id="box6" draggable="true">
+          <img src="https://www.microsoft.com/en-us/research/uploads/prod/2018/01/profile_square.jpg" alt="">
+        </div>
+
+
+      </div>
+
+      <script type="text/javascript">
+      function drag() {
+        var dragging = false;
+        var mouseX, mouseY;
+        var eleX, eleY;
+
+        var boxes = document.querySelectorAll("[draggable]");
+        for (let i = 0; i < boxes.length; i++) {
+          boxes[i].addEventListener("mousedown", mouseDown);
+          boxes[i].style.top = 0;
+          boxes[i].style.left = 0;
+        }
+        function mouseDown(e) {
+          e.preventDefault();
+
+          dragging = this;
+
+          mouseX = e.pageX;
+          mouseY = e.pageY;
+          eleX = Number.parseInt(dragging.style.left);
+          eleY = Number.parseInt(dragging.style.top);
+
+          document.addEventListener("mousemove", mouseMove);
+          document.addEventListener("mouseup", mouseUp);
+        }
+        function mouseMove(e) {
+          if (dragging) {
+            deltaMouseX = e.pageX - mouseX;
+            deltaMouseY = e.pageY - mouseY;
+
+            dragging.style.left = deltaMouseX + eleX + "px";
+            dragging.style.top = deltaMouseY + eleY + "px";
+          }
+        }
+        function mouseUp(e) {
+          dragging = false;
+
+          document.removeEventListener("mouseup", mouseUp);
+          document.removeEventListener("mousemove", mouseMove);
+        }
+      }
+      drag();
+      </script>
+</body>
+</html>
